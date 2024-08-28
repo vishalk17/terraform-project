@@ -18,10 +18,10 @@ resource "aws_vpc" "my_vpc" {
 
 # ref: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/subnet
 resource "aws_subnet" "Public_subnet_az1" {
-  depends_on = [ aws_vpc.my_vpc ]
-  cidr_block        = var.pub_subnet1
-  vpc_id            = aws_vpc.my_vpc.id
-  availability_zone = var.availability_zones.az1
+  depends_on              = [aws_vpc.my_vpc]
+  cidr_block              = var.pub_subnet1
+  vpc_id                  = aws_vpc.my_vpc.id
+  availability_zone       = var.availability_zones.az1
   map_public_ip_on_launch = true
   tags = {
     Name = " Public_subnet_az1 "
@@ -29,10 +29,10 @@ resource "aws_subnet" "Public_subnet_az1" {
 }
 
 resource "aws_subnet" "Public_subnet_az2" {
-  depends_on = [ aws_vpc.my_vpc ]
-  cidr_block        = var.pub_subnet2
-  vpc_id            = aws_vpc.my_vpc.id
-  availability_zone = var.availability_zones.az2
+  depends_on              = [aws_vpc.my_vpc]
+  cidr_block              = var.pub_subnet2
+  vpc_id                  = aws_vpc.my_vpc.id
+  availability_zone       = var.availability_zones.az2
   map_public_ip_on_launch = true
   tags = {
     Name = " Public_subnet_az2 "
@@ -45,7 +45,7 @@ resource "aws_subnet" "Public_subnet_az2" {
 
 # assigned multiple subnets to single routing table
 resource "aws_route_table_association" "public_rt_association_project1" {
-  for_each      = {
+  for_each = {
     "az1" = aws_subnet.Public_subnet_az1.id
     "az2" = aws_subnet.Public_subnet_az2.id
   }
@@ -57,7 +57,7 @@ resource "aws_route_table_association" "public_rt_association_project1" {
 # ref : https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/internet_gateway
 resource "aws_internet_gateway" "project1_igw" {
   vpc_id = aws_vpc.my_vpc.id
-  
+
   tags = {
     Name = "project1_igw"
   }
