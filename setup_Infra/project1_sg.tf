@@ -1,6 +1,9 @@
+# Ref.: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group
+
 resource "aws_security_group" "project1_sg" {
   name        = "project1_sg"
   description = "Allow ssh & web traffic"
+  vpc_id = aws_vpc.my_vpc.id // must be in same vpc
 
   tags = {
     Name = "SG_vishal"
