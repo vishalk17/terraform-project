@@ -6,7 +6,7 @@ resource "aws_security_group" "project1_sg" {
   vpc_id = aws_vpc.my_vpc.id // must be in same vpc
 
   tags = {
-    Name = "SG_vishal"
+    Name = "SG_project1"
   }
 
   dynamic "ingress" {
