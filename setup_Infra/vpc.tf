@@ -6,6 +6,7 @@
 #    avaibility zones :  ap-south-1a , ap-south-1b , ap-south-1c
 
 # ref : https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/vpc
+# This vpc will create main RT by default
 resource "aws_vpc" "my_vpc" {
   cidr_block       = "126.0.0.0/16"
   instance_tenancy = "default"
@@ -36,4 +37,18 @@ resource "aws_subnet" "Public_subnet_az2" {
   tags = {
     Name = " Public_subnet_az2 "
   }
+}
+
+## Subnet ##
+# Ref.: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route_table_association
+#       https://developer.hashicorp.com/terraform/language/meta-arguments/for_each
+
+# assigned multiple subnets to single routing table
+resource "aws_route_table_association" "public_rt_association_project1" {
+  for_each      = {
+    "az1" = aws_subnet.Public_subnet_az1.id
+    "az2" = aws_subnet.Public_subnet_az2.id
+  }
+  subnet_id      = each.value
+  route_table_id = aws_vpc.my_vpc.main_route_table_id
 }
