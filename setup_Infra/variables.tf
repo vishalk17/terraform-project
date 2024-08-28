@@ -13,3 +13,7 @@ variable "pub_subnet1" {
 variable "pub_subnet2" {
   type = string
 }
+
+variable "ingress_ports" {
+  type = list(number)
+}
