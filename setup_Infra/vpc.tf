@@ -52,3 +52,13 @@ resource "aws_route_table_association" "public_rt_association_project1" {
   subnet_id      = each.value
   route_table_id = aws_vpc.my_vpc.main_route_table_id
 }
+
+# Create Internet Gateway and attach to vpc
+# ref : https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/internet_gateway
+resource "aws_internet_gateway" "project1_igw" {
+  vpc_id = aws_vpc.my_vpc.id
+  
+  tags = {
+    Name = "project1_igw"
+  }
+}
