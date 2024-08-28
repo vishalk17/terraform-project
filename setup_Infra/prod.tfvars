@@ -8,4 +8,4 @@ availability_zones = {
 pub_subnet1 = "126.0.1.0/24"
 pub_subnet2 = "126.0.2.0/24"
 
-ingress_ports = [22]
+ingress_ports = [80,443,22]
