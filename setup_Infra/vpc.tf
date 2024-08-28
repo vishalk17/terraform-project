@@ -62,3 +62,11 @@ resource "aws_internet_gateway" "project1_igw" {
     Name = "project1_igw"
   }
 }
+
+# Add route to the internet gateway for existing public route table
+# Ref.: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route
+resource "aws_route" "public_route" {
+  destination_cidr_block = "0.0.0.0/0"
+  route_table_id         = aws_vpc.my_vpc.main_route_table_id
+  gateway_id             = aws_internet_gateway.project1_igw.id
+}
