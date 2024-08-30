@@ -1,3 +1,4 @@
+# Ref.:  https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb_target_group
 resource "aws_lb_target_group" "TG" {
   name     = "project1-TG-Alb"
   port     = 80
@@ -23,12 +24,13 @@ resource "aws_lb_target_group" "TG" {
   #   }
 }
 
+# Ref.: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb_target_group_attachment
+# Target type : instances
 resource "aws_lb_target_group_attachment" "TG_attachment" {
-
-  for_each = toset([
-    aws_instance.pub_instance1.id,
-    aws_instance.pub_instance2.id
-  ])
+  for_each = {
+    "instance1" = aws_instance.pub_instance1.id
+    "instance2" = aws_instance.pub_instance2.id
+  }
 
   target_group_arn = aws_lb_target_group.TG.arn
   target_id        = each.value
