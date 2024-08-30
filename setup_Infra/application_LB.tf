@@ -2,7 +2,7 @@
 resource "aws_lb" "Alb" {
   depends_on         = [aws_lb_target_group.TG]
   name               = "Alb-project-1"
-  internal           = false  // false meaning internet facing
+  internal           = false // false meaning internet facing
   load_balancer_type = "application"
   security_groups    = [aws_security_group.project1_sg.id]
   subnets            = [aws_subnet.Public_subnet_az1.id, aws_subnet.Public_subnet_az2.id]

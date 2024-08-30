@@ -17,3 +17,12 @@ variable "pub_subnet2" {
 variable "ingress_ports" {
   type = list(number)
 }
+
+variable "environment" {
+  type        = string
+  description = "High or Low Workload"
+}
+
+variable "high_capacity" {
+  type = string
+}

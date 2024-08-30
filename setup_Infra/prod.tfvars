@@ -1,4 +1,6 @@
-aws_region = "ap-south-1"
+environment   = "production-high-capacity"
+high_capacity = "t2.micro" // for production-high-capacity environment. if not this then t2.small will be default
+aws_region    = "ap-south-1"
 availability_zones = {
   az1 = "ap-south-1a"
   az2 = "ap-south-1b"

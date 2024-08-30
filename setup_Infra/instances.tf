@@ -34,7 +34,7 @@ output "ami" {
 resource "aws_instance" "pub_instance1" {
   depends_on             = [aws_key_pair.project1_key_pair]
   ami                    = data.aws_ami.ubuntu.id // Fetching ami id using datasource
-  instance_type          = "t2.micro"
+  instance_type          = var.environment == "production-high-capacity" ? var.high_capacity : "t2.small"
   key_name               = aws_key_pair.project1_key_pair.key_name
   vpc_security_group_ids = [aws_security_group.project1_sg.id]
   subnet_id              = aws_subnet.Public_subnet_az1.id
@@ -47,7 +47,7 @@ resource "aws_instance" "pub_instance1" {
 resource "aws_instance" "pub_instance2" {
   depends_on                  = [aws_key_pair.project1_key_pair]
   ami                         = data.aws_ami.ubuntu.id // Fetching ami id using datasource
-  instance_type               = "t2.micro"
+  instance_type               = var.environment == "production-high-capacity" ? var.high_capacity : "t2.small"
   key_name                    = aws_key_pair.project1_key_pair.key_name
   vpc_security_group_ids      = [aws_security_group.project1_sg.id]
   subnet_id                   = aws_subnet.Public_subnet_az2.id
