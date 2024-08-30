@@ -1,8 +1,13 @@
 # Terraform Infrastructure Setup
 
-This project aims to automate the creation and management of AWS infrastructure using Terraform. 
+This project aims to automate the creation and management of AWS infrastructure using Terraform.
 
-The setup includes creating a Virtual Private Cloud (VPC), subnets, route tables, security groups, EC2 instances, a target group, and an application load balancer. 
+🔹 In this project, I used various Terraform features such as:
+
+ - Conditional expression , Variables , Built-in functions , Remote backend , Dynamic blocks, Provisioners , depends_on, datasource
+
+---------
+The setup includes creating a Virtual Private Cloud (VPC), subnets, route tables, security groups, EC2 instances, deploy web app, a target group, and an application load balancer. 
 
 It also configures a remote backend for storing Terraform state files using S3 and DynamoDB.
 
